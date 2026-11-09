@@ -15,4 +15,10 @@ export function parseEnv(source: Record<string, unknown>): WebEnv {
   return result.data;
 }
 
-export const env = parseEnv(import.meta.env);
+let cached: WebEnv | undefined;
+
+/** Lazy + memoized: validated once at app startup (see main.tsx), never at import time. */
+export function getEnv(): WebEnv {
+  cached ??= parseEnv(import.meta.env);
+  return cached;
+}
