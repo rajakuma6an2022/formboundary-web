@@ -1,4 +1,26 @@
+# Baseline status board (Day 1)
 
-## Day 2 update
-Decisions recorded in docs/adr (0001-0005). Schema types in src/features/builder/types.ts.
-API contract lives in formboundary-api/docs/API-CONTRACT.md.
+Legend: DONE / PARTIAL / NOT STARTED
+
+| Area | Web | API | Notes |
+|---|---|---|---|
+| Repository + tooling | NOT STARTED | NOT STARTED | Day 3 |
+| Zod schemas + reducer | NOT STARTED | n/a | Day 4 |
+| Palette + canvas | NOT STARTED | n/a | Day 5 |
+| Inspector | NOT STARTED | n/a | Day 6 |
+| Drag and drop | NOT STARTED | n/a | Day 7 |
+| Preview renderer | NOT STARTED | n/a | Day 8 |
+| RHF + Zod validation | NOT STARTED | NOT STARTED | Day 9 |
+| Draft save / recovery | NOT STARTED | NOT STARTED | Day 10 |
+| JSON import / export | NOT STARTED | n/a | Day 11 |
+| Form persistence API | n/a | NOT STARTED | Day 12 |
+| Auth + sessions | NOT STARTED | NOT STARTED | Day 13 |
+| Ownership + publish | NOT STARTED | NOT STARTED | Day 14 |
+| Public form + submissions | NOT STARTED | NOT STARTED | Day 15 |
+| Tests / a11y / perf / deploy | NOT STARTED | NOT STARTED | Day 16-18 |
+
+## Blockers
+- None known. Need MongoDB Atlas cluster with databases `formboundary` and `formboundary_test` (Day 3).
+
+## Next commit
+Day 2: architecture decisions (ADRs) and the schema + API contract.
