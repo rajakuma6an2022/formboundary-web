@@ -1,6 +1,7 @@
 # Acceptance checklist
 
 ## MVP acceptance
+
 - [ ] Unauthenticated user cannot access builder or private forms; logout invalidates the session
 - [ ] Owner sees only owned forms; loading / empty / error states complete
 - [ ] Text, email, textarea, select, checkbox work; selected field is configurable
@@ -12,6 +13,7 @@
 - [ ] Owner can view own submissions; another user cannot
 
 ## Definition of done
+
 - [ ] Create, configure, reorder, preview, save and reopen a form
 - [ ] Five field types validate consistently
 - [ ] Keyboard users can add, select, reorder; focus visible and announced
