@@ -14,6 +14,11 @@ const variants: Record<Variant, string> = {
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant };
 
-export function Button({ variant = 'primary', className = '', type = 'button', ...rest }: ButtonProps) {
+export function Button({
+  variant = 'primary',
+  className = '',
+  type = 'button',
+  ...rest
+}: ButtonProps) {
   return <button type={type} className={`${base} ${variants[variant]} ${className}`} {...rest} />;
 }
