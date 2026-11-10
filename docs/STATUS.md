@@ -31,3 +31,8 @@ Day 2: architecture decisions (ADRs) and the schema + API contract.
 
 Zod schemas, validation (save + publish rules), field factory and reducer done with unit tests.
 ADR 0006 records the reject-vs-accept rule. Builder UI starts Day 5.
+
+## Day 5 update
+
+Palette, canvas, empty state, select/add/remove, focus management and live announcements done.
+Builder state is in memory only (persistence on Day 10 and Day 12). Inspector is Day 6.
