@@ -46,7 +46,9 @@ describe('invalid data', () => {
   });
 
   it('rejects placeholder and length rules on a checkbox', () => {
-    const issues = validateDefinition(def([{ ...base, type: 'checkbox', placeholder: 'x', minLength: 1 }]));
+    const issues = validateDefinition(
+      def([{ ...base, type: 'checkbox', placeholder: 'x', minLength: 1 }]),
+    );
     expect(issues.length).toBeGreaterThan(0);
   });
 
@@ -55,10 +57,13 @@ describe('invalid data', () => {
     expect(issues.length).toBeGreaterThan(0);
   });
 
-  it.each(['Name', '1name', 'has space', 'has-dash', '', 'a'.repeat(41)])('rejects field name %j', (name) => {
-    const issues = validateDefinition(def([{ ...base, name, type: 'text' }]));
-    expect(issues.some((i) => i.fieldId === 'f1' && i.path[0] === 'name')).toBe(true);
-  });
+  it.each(['Name', '1name', 'has space', 'has-dash', '', 'a'.repeat(41)])(
+    'rejects field name %j',
+    (name) => {
+      const issues = validateDefinition(def([{ ...base, name, type: 'text' }]));
+      expect(issues.some((i) => i.fieldId === 'f1' && i.path[0] === 'name')).toBe(true);
+    },
+  );
 
   it('rejects an empty or whitespace label', () => {
     const issues = validateDefinition(def([{ ...base, label: '   ', type: 'text' }]));
@@ -66,7 +71,9 @@ describe('invalid data', () => {
   });
 
   it('rejects min length greater than max length', () => {
-    const issues = validateDefinition(def([{ ...base, type: 'text', minLength: 10, maxLength: 5 }]));
+    const issues = validateDefinition(
+      def([{ ...base, type: 'text', minLength: 10, maxLength: 5 }]),
+    );
     expect(issues).toContainEqual(expect.objectContaining({ fieldId: 'f1', path: ['maxLength'] }));
   });
 
@@ -99,7 +106,9 @@ describe('invalid data', () => {
         },
       ]),
     );
-    expect(issues).toContainEqual(expect.objectContaining({ fieldId: 'f1', path: ['options', 1, 'value'] }));
+    expect(issues).toContainEqual(
+      expect.objectContaining({ fieldId: 'f1', path: ['options', 1, 'value'] }),
+    );
   });
 
   it('reports an empty title as a form-level issue', () => {

@@ -28,5 +28,6 @@ Legend: DONE / PARTIAL / NOT STARTED
 Day 2: architecture decisions (ADRs) and the schema + API contract.
 
 ## Day 4 update
+
 Zod schemas, validation (save + publish rules), field factory and reducer done with unit tests.
 ADR 0006 records the reject-vs-accept rule. Builder UI starts Day 5.
