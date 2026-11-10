@@ -36,3 +36,9 @@ ADR 0006 records the reject-vs-accept rule. Builder UI starts Day 5.
 
 Palette, canvas, empty state, select/add/remove, focus management and live announcements done.
 Builder state is in memory only (persistence on Day 10 and Day 12). Inspector is Day 6.
+
+## Day 6 update
+
+Inspector (label, name, placeholder, helper text, required, min/max length, select options),
+inline errors, duplicate detection and publish-blocking summary done with tests.
+Next: Day 7 drag-and-drop reorder with keyboard support.
