@@ -14,7 +14,10 @@ type Props = { onAdd: (type: FieldType) => void };
 
 export function FieldPalette({ onAdd }: Props) {
   return (
-    <section aria-labelledby="palette-heading" className="rounded-card border border-line bg-surface p-4">
+    <section
+      aria-labelledby="palette-heading"
+      className="rounded-card border border-line bg-surface p-4"
+    >
       <h2 id="palette-heading" className="text-base font-semibold">
         Add a field
       </h2>

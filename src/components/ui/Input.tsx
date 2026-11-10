@@ -11,7 +11,15 @@ function describedBy(...ids: (string | false | undefined)[]) {
   return joined === '' ? undefined : joined;
 }
 
-function Messages({ id, hint, error }: { id: string; hint?: string | undefined; error?: string | undefined }) {
+function Messages({
+  id,
+  hint,
+  error,
+}: {
+  id: string;
+  hint?: string | undefined;
+  error?: string | undefined;
+}) {
   return (
     <>
       {hint && (
@@ -29,7 +37,10 @@ function Messages({ id, hint, error }: { id: string; hint?: string | undefined; 
   );
 }
 
-type LabeledInputProps = Common & { mono?: boolean } & Omit<InputHTMLAttributes<HTMLInputElement>, 'id' | 'className'>;
+type LabeledInputProps = Common & { mono?: boolean } & Omit<
+    InputHTMLAttributes<HTMLInputElement>,
+    'id' | 'className'
+  >;
 
 export function LabeledInput({ label, hint, error, mono = false, ...rest }: LabeledInputProps) {
   const id = useId();
@@ -50,7 +61,8 @@ export function LabeledInput({ label, hint, error, mono = false, ...rest }: Labe
   );
 }
 
-type LabeledTextareaProps = Common & Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'id' | 'className'>;
+type LabeledTextareaProps = Common &
+  Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'id' | 'className'>;
 
 export function LabeledTextarea({ label, hint, error, ...rest }: LabeledTextareaProps) {
   const id = useId();

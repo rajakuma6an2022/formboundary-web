@@ -28,7 +28,9 @@ export function BuilderPage() {
     const position = state.fields.length + 1;
     pendingFocusId.current = fieldCardId(field.id);
     dispatch({ type: 'field/add', field });
-    setAnnouncement(`${FIELD_TYPE_LABELS[type]} field added at position ${position} of ${position}.`);
+    setAnnouncement(
+      `${FIELD_TYPE_LABELS[type]} field added at position ${position} of ${position}.`,
+    );
   }
 
   function handleRemove(field: FormField) {
@@ -55,7 +57,9 @@ export function BuilderPage() {
             </Link>
             <h1 className="sr-only">Form builder</h1>
             <span className="text-sm text-muted">Form ID: {formId}</span>
-            <span className="rounded-control bg-page px-2 py-1 text-xs text-muted">Draft · not saved yet</span>
+            <span className="rounded-control bg-page px-2 py-1 text-xs text-muted">
+              Draft · not saved yet
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <Button variant="secondary" disabled>
@@ -85,7 +89,10 @@ export function BuilderPage() {
           onSelect={(id) => dispatch({ type: 'field/select', id })}
           onRemove={handleRemove}
         />
-        <aside aria-label="Field settings" className="rounded-card border border-line bg-surface p-4">
+        <aside
+          aria-label="Field settings"
+          className="rounded-card border border-line bg-surface p-4"
+        >
           <h2 className="text-base font-semibold">Field settings</h2>
           <p className="mt-2 text-muted">Field settings appear here once the inspector is added.</p>
         </aside>

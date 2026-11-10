@@ -35,7 +35,10 @@ export function BuilderCanvas({
   const descriptionError = formIssues.find((i) => i.path[0] === 'description')?.message;
 
   return (
-    <section aria-labelledby={CANVAS_HEADING_ID} className="rounded-card border border-line bg-surface p-4">
+    <section
+      aria-labelledby={CANVAS_HEADING_ID}
+      className="rounded-card border border-line bg-surface p-4"
+    >
       <h2 id={CANVAS_HEADING_ID} tabIndex={-1} className="sr-only">
         Form canvas
       </h2>
@@ -95,7 +98,9 @@ export function BuilderCanvas({
                     {FIELD_TYPE_LABELS[field.type]} · name: {field.name}
                   </span>
                   {needsAttention && (
-                    <span className="mt-1 inline-block text-xs font-medium text-danger">Needs attention</span>
+                    <span className="mt-1 inline-block text-xs font-medium text-danger">
+                      Needs attention
+                    </span>
                   )}
                 </button>
                 <Button
