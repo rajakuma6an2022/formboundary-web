@@ -15,23 +15,36 @@ type Props = {
 };
 
 // Issue paths the inspector shows next to a specific control. Anything else is shown in the general list.
-const CONTROL_KEYS = new Set(['label', 'name', 'placeholder', 'helperText', 'minLength', 'maxLength', 'options']);
+const CONTROL_KEYS = new Set([
+  'label',
+  'name',
+  'placeholder',
+  'helperText',
+  'minLength',
+  'maxLength',
+  'options',
+]);
 
 export function FieldInspector({ field, issues, dispatch }: Props) {
   if (!field) {
     return <p className="mt-2 text-muted">Select a field on the canvas to edit its settings.</p>;
   }
 
-  const update = (changes: FieldChanges) => dispatch({ type: 'field/update', id: field.id, changes });
-  const errorFor = (key: string) => issues.find((i) => i.path.length === 1 && i.path[0] === key)?.message;
+  const update = (changes: FieldChanges) =>
+    dispatch({ type: 'field/update', id: field.id, changes });
+  const errorFor = (key: string) =>
+    issues.find((i) => i.path.length === 1 && i.path[0] === key)?.message;
   const generalIssues = issues.filter((i) => !CONTROL_KEYS.has(String(i.path[0])));
 
-  const supportsLength = field.type === 'text' || field.type === 'email' || field.type === 'textarea';
+  const supportsLength =
+    field.type === 'text' || field.type === 'email' || field.type === 'textarea';
   const supportsPlaceholder = field.type !== 'checkbox';
 
   return (
     <div className="mt-3 space-y-4">
-      <p className="text-xs text-muted">Type: {FIELD_TYPE_LABELS[field.type]} (cannot be changed)</p>
+      <p className="text-xs text-muted">
+        Type: {FIELD_TYPE_LABELS[field.type]} (cannot be changed)
+      </p>
 
       {generalIssues.length > 0 && (
         <ul className="space-y-1 text-xs font-medium text-danger">
@@ -62,7 +75,9 @@ export function FieldInspector({ field, issues, dispatch }: Props) {
           label="Placeholder"
           value={field.placeholder ?? ''}
           error={errorFor('placeholder')}
-          onChange={(e) => update({ placeholder: e.target.value === '' ? undefined : e.target.value })}
+          onChange={(e) =>
+            update({ placeholder: e.target.value === '' ? undefined : e.target.value })
+          }
         />
       )}
 
@@ -73,7 +88,11 @@ export function FieldInspector({ field, issues, dispatch }: Props) {
         onChange={(e) => update({ helperText: e.target.value === '' ? undefined : e.target.value })}
       />
 
-      <LabeledCheckbox label="Required" checked={field.required} onChange={(e) => update({ required: e.target.checked })} />
+      <LabeledCheckbox
+        label="Required"
+        checked={field.required}
+        onChange={(e) => update({ required: e.target.checked })}
+      />
 
       {supportsLength && (
         <div className="grid grid-cols-2 gap-3">
@@ -84,7 +103,9 @@ export function FieldInspector({ field, issues, dispatch }: Props) {
             step={1}
             value={field.minLength ?? ''}
             error={errorFor('minLength')}
-            onChange={(e) => update({ minLength: e.target.value === '' ? undefined : Number(e.target.value) })}
+            onChange={(e) =>
+              update({ minLength: e.target.value === '' ? undefined : Number(e.target.value) })
+            }
           />
           <LabeledInput
             label="Max length"
@@ -93,7 +114,9 @@ export function FieldInspector({ field, issues, dispatch }: Props) {
             step={1}
             value={field.maxLength ?? ''}
             error={errorFor('maxLength')}
-            onChange={(e) => update({ maxLength: e.target.value === '' ? undefined : Number(e.target.value) })}
+            onChange={(e) =>
+              update({ maxLength: e.target.value === '' ? undefined : Number(e.target.value) })
+            }
           />
         </div>
       )}
@@ -113,7 +136,8 @@ function OptionsEditor({
   update: (changes: FieldChanges) => void;
 }) {
   const optionError = (index: number, key: 'label' | 'value') =>
-    issues.find((i) => i.path[0] === 'options' && i.path[1] === index && i.path[2] === key)?.message;
+    issues.find((i) => i.path[0] === 'options' && i.path[1] === index && i.path[2] === key)
+      ?.message;
   const listError = issues.find((i) => i.path.length === 1 && i.path[0] === 'options')?.message;
 
   const patchOption = (index: number, patch: { label?: string; value?: string }) =>
@@ -153,7 +177,10 @@ function OptionsEditor({
         ))}
       </ul>
 
-      <Button variant="secondary" onClick={() => update({ options: [...field.options, createOption(field.options)] })}>
+      <Button
+        variant="secondary"
+        onClick={() => update({ options: [...field.options, createOption(field.options)] })}
+      >
         Add option
       </Button>
     </fieldset>

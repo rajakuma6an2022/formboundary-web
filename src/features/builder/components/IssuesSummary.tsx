@@ -13,7 +13,10 @@ export function IssuesSummary({ issues, fields, onGoToField }: Props) {
   if (issues.length === 0) return null;
 
   return (
-    <section aria-labelledby="issues-heading" className="rounded-card border border-danger bg-surface p-4">
+    <section
+      aria-labelledby="issues-heading"
+      className="rounded-card border border-danger bg-surface p-4"
+    >
       <h2 id="issues-heading" className="text-base font-semibold text-danger">
         Fix {issues.length} {issues.length === 1 ? 'issue' : 'issues'} before publishing
       </h2>
@@ -27,7 +30,11 @@ export function IssuesSummary({ issues, fields, onGoToField }: Props) {
                 {where}: {issue.message}
               </span>
               {field && (
-                <Button variant="secondary" onClick={() => onGoToField(field.id)} aria-label={`Go to ${where}`}>
+                <Button
+                  variant="secondary"
+                  onClick={() => onGoToField(field.id)}
+                  aria-label={`Go to ${where}`}
+                >
                   Go to field
                 </Button>
               )}

@@ -99,7 +99,9 @@ describe('inspector: validation', () => {
     const name = inspector().getByLabelText('Name');
     await setValue(user, name, 'Bad Name');
     expect(name).toHaveAttribute('aria-invalid', 'true');
-    expect(inspector().getByText(/Use lowercase letters, numbers and underscores/)).toBeInTheDocument();
+    expect(
+      inspector().getByText(/Use lowercase letters, numbers and underscores/),
+    ).toBeInTheDocument();
     expect(screen.getByText('Needs attention')).toBeInTheDocument();
 
     await setValue(user, name, 'good_name');
@@ -131,7 +133,9 @@ describe('inspector: validation', () => {
     await add(user, 'Text');
     await user.type(inspector().getByLabelText('Max length'), '5');
     await user.type(inspector().getByLabelText('Min length'), '10');
-    expect(inspector().getByText(/Min length cannot be greater than max length/)).toBeInTheDocument();
+    expect(
+      inspector().getByText(/Min length cannot be greater than max length/),
+    ).toBeInTheDocument();
   });
 
   it('adds, edits and removes select options and flags duplicate values', async () => {
@@ -154,8 +158,12 @@ describe('inspector: validation', () => {
     await add(user, 'Select');
     await user.click(inspector().getByRole('button', { name: 'Remove option 2' }));
     await user.click(inspector().getByRole('button', { name: 'Remove option 1' }));
-    expect(inspector().getByText('Error: Add at least one option before publishing')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /Fix 1 issue before publishing/ })).toBeInTheDocument();
+    expect(
+      inspector().getByText('Error: Add at least one option before publishing'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Fix 1 issue before publishing/ }),
+    ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Publish' })).toBeDisabled();
   });
 
