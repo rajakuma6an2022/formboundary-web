@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
 type Variant = 'primary' | 'secondary' | 'ghost' | 'danger';
 
@@ -12,7 +12,7 @@ const variants: Record<Variant, string> = {
   danger: 'bg-danger text-white hover:opacity-90',
 };
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant };
+type ButtonProps = ComponentPropsWithRef<'button'> & { variant?: Variant };
 
 export function Button({
   variant = 'primary',

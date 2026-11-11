@@ -47,3 +47,8 @@ Next: Day 7 drag-and-drop reorder with keyboard support.
 
 Reordering done: dnd-kit pointer + keyboard sensors, announcements, Move up/down buttons, selection and focus
 rules. Pointer drag verified manually; automated E2E is planned for Day 16-18.
+
+## Day 8 update
+
+Schema-driven FieldRenderer / FormRenderer, read-only Preview mode with focus handling, unknown-field fallback.
+Submit is disabled until Day 9 wires validation. ADR 0008 recorded.
