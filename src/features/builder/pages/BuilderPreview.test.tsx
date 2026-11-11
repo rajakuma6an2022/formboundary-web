@@ -83,4 +83,23 @@ describe('preview mode', () => {
     await user.click(screen.getByRole('button', { name: 'Preview' }));
     expect(screen.getByRole('heading', { name: 'Untitled form', level: 2 })).toBeInTheDocument();
   });
+
+  it('validates inside the preview and shows a preview-only success message', async () => {
+    const user = userEvent.setup();
+    renderBuilder();
+    await addText(user);
+    await user.click(
+      within(screen.getByRole('complementary', { name: 'Field settings' })).getByLabelText(
+        'Required',
+      ),
+    );
+    await user.click(screen.getByRole('button', { name: 'Preview' }));
+
+    await user.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(screen.getByText('Error: Text 1 is required')).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText(/Text 1/), 'hello');
+    await user.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(await screen.findByText('Preview only: nothing was saved or sent.')).toBeInTheDocument();
+  });
 });
