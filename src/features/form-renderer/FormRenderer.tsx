@@ -17,7 +17,9 @@ export function FormRenderer({ definition, headingLevel = 'h1' }: Props) {
         {definition.description && <p className="mt-1 text-muted">{definition.description}</p>}
       </div>
 
-      {definition.fields.length > 0 && <p className="text-xs text-muted">Fields marked * are required.</p>}
+      {definition.fields.length > 0 && (
+        <p className="text-xs text-muted">Fields marked * are required.</p>
+      )}
 
       {definition.fields.map((field) => (
         <FieldRenderer key={field.id} field={field} />

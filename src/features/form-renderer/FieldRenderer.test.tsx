@@ -42,7 +42,10 @@ describe('FieldRenderer: one view per field type', () => {
       ],
     });
     const select = screen.getByLabelText('Topic');
-    const options = Array.from(select.querySelectorAll('option')).map((o) => [o.textContent, o.value]);
+    const options = Array.from(select.querySelectorAll('option')).map((o) => [
+      o.textContent,
+      o.value,
+    ]);
     expect(options).toEqual([
       ['Choose one', ''],
       ['Sales', 'sales'],
@@ -85,14 +88,23 @@ describe('FieldRenderer: shared behaviour', () => {
   });
 
   it('works for every type with a single error (checkbox and select too)', () => {
-    renderField({ ...base, id: 'c', name: 'c', label: 'Agree', type: 'checkbox', required: true }, 'Must be checked');
+    renderField(
+      { ...base, id: 'c', name: 'c', label: 'Agree', type: 'checkbox', required: true },
+      'Must be checked',
+    );
     expect(screen.getByLabelText(/Agree/)).toHaveAttribute('aria-invalid', 'true');
   });
 });
 
 describe('FieldRenderer: unknown field fallback', () => {
   it('shows a safe note instead of crashing or rendering markup', () => {
-    const bad = { id: 'x', name: 'x', label: 'X', required: false, type: '<img src=x onerror=alert(1)>' };
+    const bad = {
+      id: 'x',
+      name: 'x',
+      label: 'X',
+      required: false,
+      type: '<img src=x onerror=alert(1)>',
+    };
     const { container } = render(<FieldRenderer field={bad as unknown as FormField} />);
     expect(screen.getByRole('note')).toHaveTextContent('not supported');
     expect(container.querySelector('img')).toBeNull(); // text only, never HTML

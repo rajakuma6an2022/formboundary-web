@@ -6,7 +6,12 @@ import { FieldInspector } from '../components/FieldInspector';
 import { FieldPalette } from '../components/FieldPalette';
 import { IssuesSummary } from '../components/IssuesSummary';
 import { PreviewPane } from '../components/PreviewPane';
-import { builderReducer, getSelectedField, initialBuilderState, toDefinition } from '../builderReducer';
+import {
+  builderReducer,
+  getSelectedField,
+  initialBuilderState,
+  toDefinition,
+} from '../builderReducer';
 import { CANVAS_HEADING_ID, fieldCardId } from '../fieldDom';
 import { createField } from '../fieldFactory';
 import { groupIssuesByField, validateDefinition, validateForPublish } from '../schema';
@@ -51,7 +56,9 @@ export function BuilderPage() {
     const position = state.fields.length + 1;
     pendingFocusId.current = fieldCardId(field.id);
     dispatch({ type: 'field/add', field });
-    setAnnouncement(`${FIELD_TYPE_LABELS[type]} field added at position ${position} of ${position}.`);
+    setAnnouncement(
+      `${FIELD_TYPE_LABELS[type]} field added at position ${position} of ${position}.`,
+    );
   }
 
   function handleRemove(field: FormField) {
@@ -74,7 +81,9 @@ export function BuilderPage() {
     if (from === -1 || toIndex < 0 || toIndex >= state.fields.length) return;
     pendingFocusId.current = fieldCardId(field.id);
     dispatch({ type: 'field/move', id: field.id, toIndex });
-    setAnnouncement(`${field.label.trim() || 'Field'} moved to position ${toIndex + 1} of ${state.fields.length}.`);
+    setAnnouncement(
+      `${field.label.trim() || 'Field'} moved to position ${toIndex + 1} of ${state.fields.length}.`,
+    );
   }
 
   function handleBackFromPreview() {
@@ -108,7 +117,9 @@ export function BuilderPage() {
             </Link>
             <h1 className="sr-only">Form builder</h1>
             <span className="text-sm text-muted">Form ID: {formId}</span>
-            <span className="rounded-control bg-page px-2 py-1 text-xs text-muted">Draft · not saved yet</span>
+            <span className="rounded-control bg-page px-2 py-1 text-xs text-muted">
+              Draft · not saved yet
+            </span>
           </div>
           <div className="flex items-center gap-3">
             <span id="publish-status" className="text-xs text-muted">
@@ -154,7 +165,9 @@ export function BuilderPage() {
               formIssues={formIssues}
               issuesByField={issuesByField}
               onTitleChange={(title) => dispatch({ type: 'form/rename', title })}
-              onDescriptionChange={(description) => dispatch({ type: 'form/describe', description })}
+              onDescriptionChange={(description) =>
+                dispatch({ type: 'form/describe', description })
+              }
               onSelect={(id) => dispatch({ type: 'field/select', id })}
               onRemove={handleRemove}
               onMove={handleMove}
@@ -162,7 +175,10 @@ export function BuilderPage() {
             />
           </div>
 
-          <aside aria-label="Field settings" className="rounded-card border border-line bg-surface p-4">
+          <aside
+            aria-label="Field settings"
+            className="rounded-card border border-line bg-surface p-4"
+          >
             <h2 className="text-base font-semibold">Field settings</h2>
             <FieldInspector
               field={selectedField}

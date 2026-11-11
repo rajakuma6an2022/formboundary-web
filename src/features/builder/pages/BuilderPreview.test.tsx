@@ -57,7 +57,9 @@ describe('preview mode', () => {
     await user.click(screen.getByRole('button', { name: 'Preview' }));
     await user.click(screen.getByRole('button', { name: 'Back to editor' }));
 
-    const label = within(screen.getByRole('complementary', { name: 'Field settings' })).getByLabelText('Label');
+    const label = within(
+      screen.getByRole('complementary', { name: 'Field settings' }),
+    ).getByLabelText('Label');
     await user.clear(label);
     await user.type(label, 'Your name');
     await user.click(screen.getByRole('button', { name: 'Preview' }));
@@ -68,7 +70,9 @@ describe('preview mode', () => {
     const user = userEvent.setup();
     renderBuilder();
     await addText(user);
-    const label = within(screen.getByRole('complementary', { name: 'Field settings' })).getByLabelText('Label');
+    const label = within(
+      screen.getByRole('complementary', { name: 'Field settings' }),
+    ).getByLabelText('Label');
     await user.clear(label);
     expect(screen.getByRole('button', { name: 'Preview' })).toBeDisabled();
   });
