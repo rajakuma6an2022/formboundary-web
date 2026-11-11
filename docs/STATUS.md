@@ -42,3 +42,8 @@ Builder state is in memory only (persistence on Day 10 and Day 12). Inspector is
 Inspector (label, name, placeholder, helper text, required, min/max length, select options),
 inline errors, duplicate detection and publish-blocking summary done with tests.
 Next: Day 7 drag-and-drop reorder with keyboard support.
+
+## Day 7 update
+
+Reordering done: dnd-kit pointer + keyboard sensors, announcements, Move up/down buttons, selection and focus
+rules. Pointer drag verified manually; automated E2E is planned for Day 16-18.

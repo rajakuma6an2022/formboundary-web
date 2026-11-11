@@ -55,6 +55,23 @@ export function BuilderPage() {
     setAnnouncement(`Removed ${field.label || 'field'}.`);
   }
 
+  // Drag and drop: dnd-kit announces start/over/drop/cancel itself, so we only update state here.
+  function handleMove(id: string, toIndex: number) {
+    dispatch({ type: 'field/move', id, toIndex });
+  }
+
+  // Move up / down buttons: update state, keep focus on the moved card, announce the result.
+  function handleMoveStep(field: FormField, delta: -1 | 1) {
+    const from = state.fields.findIndex((f) => f.id === field.id);
+    const toIndex = from + delta;
+    if (from === -1 || toIndex < 0 || toIndex >= state.fields.length) return;
+    pendingFocusId.current = fieldCardId(field.id);
+    dispatch({ type: 'field/move', id: field.id, toIndex });
+    setAnnouncement(
+      `${field.label.trim() || 'Field'} moved to position ${toIndex + 1} of ${state.fields.length}.`,
+    );
+  }
+
   function handleGoToField(id: string) {
     dispatch({ type: 'field/select', id });
     document.getElementById(fieldCardId(id))?.focus();
@@ -123,6 +140,8 @@ export function BuilderPage() {
             onDescriptionChange={(description) => dispatch({ type: 'form/describe', description })}
             onSelect={(id) => dispatch({ type: 'field/select', id })}
             onRemove={handleRemove}
+            onMove={handleMove}
+            onMoveStep={handleMoveStep}
           />
         </div>
 
