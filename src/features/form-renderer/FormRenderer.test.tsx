@@ -65,7 +65,10 @@ describe('rendering from schema', () => {
   });
 
   it('refuses to render a definition that fails the schema', () => {
-    const bad = { ...definition, fields: [{ id: 'x', name: 'Bad Name', label: 'X', required: false, type: 'text' }] };
+    const bad = {
+      ...definition,
+      fields: [{ id: 'x', name: 'Bad Name', label: 'X', required: false, type: 'text' }],
+    };
     render(<FormRenderer definition={bad as FormDefinition} onSubmit={noop} />);
     expect(screen.getByRole('alert')).toHaveTextContent('configuration is invalid');
   });
@@ -100,7 +103,9 @@ describe('invalid submission', () => {
     render(<FormRenderer definition={definition} onSubmit={noop} />);
     await user.click(screen.getByRole('button', { name: 'Submit' }));
     await user.type(screen.getByLabelText(/Your name/), 'Jane');
-    await waitFor(() => expect(screen.queryByText('Error: Your name is required')).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText('Error: Your name is required')).not.toBeInTheDocument(),
+    );
   });
 
   it('validates an email address', async () => {
@@ -122,7 +127,12 @@ describe('valid submission', () => {
     await user.click(screen.getByRole('button', { name: 'Submit' }));
 
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit).toHaveBeenCalledWith({ name: 'Jane', email: 'jane@example.com', topic: '', agree: true });
+    expect(onSubmit).toHaveBeenCalledWith({
+      name: 'Jane',
+      email: 'jane@example.com',
+      topic: '',
+      agree: true,
+    });
     expect(await screen.findByRole('status')).toHaveTextContent('Thanks!');
   });
 
@@ -178,12 +188,17 @@ describe('server errors', () => {
 
   it('shows a generic message for a network failure and allows retry', async () => {
     const user = userEvent.setup();
-    const onSubmit = vi.fn().mockRejectedValueOnce(new TypeError('Failed to fetch')).mockResolvedValueOnce(undefined);
+    const onSubmit = vi
+      .fn()
+      .mockRejectedValueOnce(new TypeError('Failed to fetch'))
+      .mockResolvedValueOnce(undefined);
     render(<FormRenderer definition={definition} onSubmit={onSubmit} />);
     await fillValid(user);
     await user.click(screen.getByRole('button', { name: 'Submit' }));
 
-    expect(await screen.findByRole('alert')).toHaveTextContent('Could not submit the form. Please try again.');
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'Could not submit the form. Please try again.',
+    );
     expect(screen.getByLabelText(/Your name/)).toHaveValue('  Jane  '); // what the user typed is kept
 
     await user.click(screen.getByRole('button', { name: 'Submit' }));

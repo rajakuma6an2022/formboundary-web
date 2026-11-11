@@ -21,7 +21,10 @@ type Props = {
 /** Renders a form ONLY from its schema, and validates answers with rules generated from the same schema. */
 export function FormRenderer(props: Props) {
   // Defensive: never build a form from a definition that fails the schema (imported or tampered data).
-  const isValid = useMemo(() => formDefinitionSchema.safeParse(props.definition).success, [props.definition]);
+  const isValid = useMemo(
+    () => formDefinitionSchema.safeParse(props.definition).success,
+    [props.definition],
+  );
   if (!isValid) {
     return (
       <p role="alert" className="rounded-control border border-danger p-3 text-sm text-danger">
@@ -104,7 +107,8 @@ function ValidatedForm({ definition, onSubmit, headingLevel = 'h1', successMessa
           {invalidFields.length > 0 && (
             <>
               <p className="font-medium text-danger">
-                Fix {invalidFields.length} {invalidFields.length === 1 ? 'field' : 'fields'} to continue:
+                Fix {invalidFields.length} {invalidFields.length === 1 ? 'field' : 'fields'} to
+                continue:
               </p>
               <ul className="mt-1 list-disc pl-5">
                 {invalidFields.map((f) => (
@@ -124,7 +128,9 @@ function ValidatedForm({ definition, onSubmit, headingLevel = 'h1', successMessa
         </div>
       )}
 
-      {definition.fields.length > 0 && <p className="text-xs text-muted">Fields marked * are required.</p>}
+      {definition.fields.length > 0 && (
+        <p className="text-xs text-muted">Fields marked * are required.</p>
+      )}
 
       {definition.fields.map((field) => (
         <FieldRenderer

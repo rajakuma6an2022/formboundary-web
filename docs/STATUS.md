@@ -52,3 +52,9 @@ rules. Pointer drag verified manually; automated E2E is planned for Day 16-18.
 
 Schema-driven FieldRenderer / FormRenderer, read-only Preview mode with focus handling, unknown-field fallback.
 Submit is disabled until Day 9 wires validation. ADR 0008 recorded.
+
+## Day 9 update
+
+Answer validation generated from the form schema, react-hook-form + Zod resolver, error summary, first-invalid
+focus, submit state, server error mapping. Preview submit is client-only. The API re-validates on Day 15.
+Next: Day 10 draft save and local recovery.

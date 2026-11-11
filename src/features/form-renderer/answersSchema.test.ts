@@ -30,13 +30,19 @@ describe('text / textarea', () => {
 
   it('enforces min and max length on the trimmed value', () => {
     const d = def({ ...b, type: 'textarea', minLength: 3, maxLength: 5 });
-    expect(issues(d, { full_name: 'ab' }).full_name).toBe('Full name must be at least 3 characters');
-    expect(issues(d, { full_name: 'abcdef' }).full_name).toBe('Full name must be at most 5 characters');
+    expect(issues(d, { full_name: 'ab' }).full_name).toBe(
+      'Full name must be at least 3 characters',
+    );
+    expect(issues(d, { full_name: 'abcdef' }).full_name).toBe(
+      'Full name must be at most 5 characters',
+    );
     expect(issues(d, { full_name: '  abcde  ' })).toEqual({});
   });
 
   it('returns trimmed values', () => {
-    const result = buildAnswersSchema(def({ ...b, type: 'text' })).safeParse({ full_name: '  Jane  ' });
+    const result = buildAnswersSchema(def({ ...b, type: 'text' })).safeParse({
+      full_name: '  Jane  ',
+    });
     expect(result.success && result.data).toEqual({ full_name: 'Jane' });
   });
 });
@@ -88,7 +94,10 @@ describe('checkbox', () => {
 
 describe('whole form', () => {
   it('strips unknown keys so extra data never reaches onSubmit', () => {
-    const result = buildAnswersSchema(def({ ...b, type: 'text' })).safeParse({ full_name: 'Jane', isAdmin: true });
+    const result = buildAnswersSchema(def({ ...b, type: 'text' })).safeParse({
+      full_name: 'Jane',
+      isAdmin: true,
+    });
     expect(result.success && result.data).toEqual({ full_name: 'Jane' });
   });
 

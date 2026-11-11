@@ -22,21 +22,24 @@ function schemaForField(field: FormField): z.ZodType {
     case 'email':
     case 'textarea':
       // .trim() runs first, so every rule below sees the trimmed value and the submitted value is trimmed.
-      return z.string().trim().superRefine((value, ctx) => {
-        if (value === '') {
-          if (field.required) addIssue(ctx, `${field.label} is required`);
-          return; // optional + empty: skip the other rules
-        }
-        if (field.minLength !== undefined && value.length < field.minLength) {
-          addIssue(ctx, `${field.label} must be at least ${field.minLength} characters`);
-        }
-        if (field.maxLength !== undefined && value.length > field.maxLength) {
-          addIssue(ctx, `${field.label} must be at most ${field.maxLength} characters`);
-        }
-        if (field.type === 'email' && !emailCheck.safeParse(value).success) {
-          addIssue(ctx, 'Enter a valid email address');
-        }
-      });
+      return z
+        .string()
+        .trim()
+        .superRefine((value, ctx) => {
+          if (value === '') {
+            if (field.required) addIssue(ctx, `${field.label} is required`);
+            return; // optional + empty: skip the other rules
+          }
+          if (field.minLength !== undefined && value.length < field.minLength) {
+            addIssue(ctx, `${field.label} must be at least ${field.minLength} characters`);
+          }
+          if (field.maxLength !== undefined && value.length > field.maxLength) {
+            addIssue(ctx, `${field.label} must be at most ${field.maxLength} characters`);
+          }
+          if (field.type === 'email' && !emailCheck.safeParse(value).success) {
+            addIssue(ctx, 'Enter a valid email address');
+          }
+        });
 
     case 'select': {
       const allowed = new Set(field.options.map((o) => o.value));
@@ -69,6 +72,7 @@ export function buildAnswersSchema(definition: FormDefinition): z.ZodType<Answer
 
 export function buildDefaultValues(definition: FormDefinition): Answers {
   const values: Answers = {};
-  for (const field of definition.fields) values[field.name] = field.type === 'checkbox' ? false : '';
+  for (const field of definition.fields)
+    values[field.name] = field.type === 'checkbox' ? false : '';
   return values;
 }
