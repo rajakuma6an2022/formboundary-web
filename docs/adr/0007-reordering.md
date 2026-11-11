@@ -3,6 +3,7 @@
 Status: accepted
 
 ## Decision
+
 - dnd-kit `DndContext` + `SortableContext` (vertical list, `closestCenter`).
 - Sensors: `PointerSensor` (activation distance 5px so a click stays a click) and `KeyboardSensor`
   with `sortableKeyboardCoordinates`.
@@ -15,8 +16,10 @@ Status: accepted
 - Selection never follows a move. After a button move, focus stays on the moved card.
 
 ## Consequences
+
 - Keyboard path is tested in jsdom with mocked layout. Real pointer dragging needs an E2E test (Day 16-18).
 - Two live regions exist (ours and dnd-kit's), so tests read both via `liveText()`.
 
 ## Interview line
+
 "Drag is an enhancement, not the only way: the same reducer action is reachable from the pointer, the keyboard and plain buttons."

@@ -7,7 +7,8 @@ function makeFields(): FormField[] {
   let n = 0;
   const newId = () => `id_${++n}`;
   const fields: FormField[] = [];
-  for (const type of ['text', 'email', 'checkbox'] as const) fields.push(createField(type, fields, newId));
+  for (const type of ['text', 'email', 'checkbox'] as const)
+    fields.push(createField(type, fields, newId));
   return fields;
 }
 

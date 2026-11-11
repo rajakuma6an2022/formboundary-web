@@ -26,8 +26,15 @@ export function SortableFieldCard({
   onRemove,
   onMoveStep,
 }: Props) {
-  const { attributes, listeners, setNodeRef, setActivatorNodeRef, transform, transition, isDragging } =
-    useSortable({ id: field.id });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    setActivatorNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: field.id });
 
   const name = field.label.trim() === '' ? 'field' : field.label;
 
@@ -73,7 +80,9 @@ export function SortableFieldCard({
         <span className="block truncate text-xs text-muted">
           {FIELD_TYPE_LABELS[field.type]} · name: {field.name}
         </span>
-        {needsAttention && <span className="mt-1 inline-block text-xs font-medium text-danger">Needs attention</span>}
+        {needsAttention && (
+          <span className="mt-1 inline-block text-xs font-medium text-danger">Needs attention</span>
+        )}
       </button>
 
       {/* Explicit move buttons: a non-drag alternative for pointer, keyboard and touch users. */}

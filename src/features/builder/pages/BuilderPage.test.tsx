@@ -20,7 +20,9 @@ describe('builder palette and canvas', () => {
     renderBuilder();
     expect(screen.getByText('No fields yet')).toBeInTheDocument();
     for (const type of FIELD_TYPES) {
-      expect(screen.getByRole('button', { name: `Add ${FIELD_TYPE_LABELS[type]} field` })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: `Add ${FIELD_TYPE_LABELS[type]} field` }),
+      ).toBeInTheDocument();
     }
   });
 

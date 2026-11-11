@@ -8,7 +8,11 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 import type { DragEndEvent } from '@dnd-kit/core';
-import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 import { LabeledInput, LabeledTextarea } from '@/components/ui/Input';
 import { CANVAS_HEADING_ID } from '../fieldDom';
 import { SCREEN_READER_INSTRUCTIONS, buildAnnouncements, computeMove } from '../reorder';
@@ -65,7 +69,10 @@ export function BuilderCanvas({
   }
 
   return (
-    <section aria-labelledby={CANVAS_HEADING_ID} className="rounded-card border border-line bg-surface p-4">
+    <section
+      aria-labelledby={CANVAS_HEADING_ID}
+      className="rounded-card border border-line bg-surface p-4"
+    >
       <h2 id={CANVAS_HEADING_ID} tabIndex={-1} className="sr-only">
         Form canvas
       </h2>
