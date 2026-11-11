@@ -27,7 +27,12 @@ export function PreviewPane({ definition, onBack }: Props) {
         This is how your form will look. Nothing typed here is saved.
       </p>
       <div className="rounded-card border border-line bg-surface p-6">
-        <FormRenderer definition={definition} headingLevel="h2" />
+        <FormRenderer
+          definition={definition}
+          headingLevel="h2"
+          onSubmit={async () => undefined}
+          successMessage="Preview only: nothing was saved or sent."
+        />
       </div>
     </main>
   );
