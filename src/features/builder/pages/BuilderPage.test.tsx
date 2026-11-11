@@ -1,7 +1,7 @@
 import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
-import { renderBuilder } from '@/test/renderBuilder';
+import { liveText, renderBuilder } from '@/test/renderBuilder';
 import { FIELD_TYPES, FIELD_TYPE_LABELS } from '../types';
 
 function fieldCard(label: string) {
@@ -20,9 +20,7 @@ describe('builder palette and canvas', () => {
     renderBuilder();
     expect(screen.getByText('No fields yet')).toBeInTheDocument();
     for (const type of FIELD_TYPES) {
-      expect(
-        screen.getByRole('button', { name: `Add ${FIELD_TYPE_LABELS[type]} field` }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: `Add ${FIELD_TYPE_LABELS[type]} field` })).toBeInTheDocument();
     }
   });
 
@@ -43,7 +41,7 @@ describe('builder palette and canvas', () => {
     const card = fieldCard('Text 1');
     expect(card).toHaveAttribute('aria-pressed', 'true');
     expect(card).toHaveFocus();
-    expect(screen.getByRole('status')).toHaveTextContent('Text field added at position 1 of 1.');
+    expect(liveText()).toContain('Text field added at position 1 of 1.');
   });
 
   it('gives repeated fields unique names', async () => {
